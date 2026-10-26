@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-    <meta charset ="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="desciption" content="a completer">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>gestion de livres</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
+
 <body>
     <header class="bg-slate-700 text-white h-30 flex align-middle">
         <div class="flex items-center gap-4">
@@ -22,45 +24,73 @@
     </header>
 
     <main>
-        <section>
-            <form>
-                <div>
-                    <h2>Ajouter un livre</h2>
+        <section class="border border-black rounded bg-slate-100 my-10 mx-8">
+            <div>
+                <h2 class="text-4xl font-bold text-slate-700 py-10 px-20">Ajouter un livre</h2>
+            </div>
+            <form class="grid grid-cols-1 md:grid-cols-3 px-20 gap-8">
+                <div class="flex flex-col font-bold text-xl text-slate-700">
+                    <label for="title">Titre</label>
+                    <input class="border border-black rounded w-80 h-10 bg-white" type="text" id="title"
+                        placeholder="Ex: Hamelet" required>
                 </div>
-                <label for="title">Titre</label>
-                <input type="text" id="title" placeholder="Ex: Hamelet" required>
-                <label for="date">Année de publication</label>
-                <input type="date" id="date" required>
-                
 
+                <div class="flex flex-col font-bold text-xl text-slate-700">
+                    <label for="date">Année de publication</label>
+                    <input class="border border-black rounded w-80 h-10 bg-white" type="number" id="date"
+                        placeholder="Ex: 1999">
+                </div>
+
+                <div class="flex flex-col font-bold text-xl text-slate-700">
+                    <label for="genre">Genre</label>
+                    <input class="border border-black rounded w-80 h-10 bg-white" type="text" id="genre"
+                        placeholder="Ex: Roman">
+                </div>
+
+                <div class="flex flex-col font-bold text-xl text-slate-700">
+                    <label for="author">Auteur</label>
+                    <input class="border border-black rounded w-80 h-10 bg-white" type="text" id="author"
+                        placeholder="Ex: Ahmed Alami" required>
+                </div>
+
+                <div class="flex flex-col font-bold text-xl text-slate-700">
+                    <label for="statut">Statut-de-Lecture</label>
+                    <select class="border border-black rounded w-80 h-10 bg-white" id="statut">
+                        <option value="to-read">To-Read</option>
+                        <option value="reading">Reading</option>
+                        <option value="read">Read</option>
+                    </select>
+                </div>
+
+                <div class="flex flex-col font-bold text-xl text-slate-700">
+                    <label for="description">Description</label>
+                    <textarea class="border border-black rounded w-80 h-10 bg-white" name="desciption" id="desciption"
+                        placeholder="Une courte description du livre"></textarea>
+                </div>
+                <div>
+                    <button class="bg-slate-700 text-white text-2xl h-15 w-50 rounded-full my-2">Ajouter</button>
+                </div>
             </form>
+        </section>
+
+        <section class="flex flex-row gap-10 border border-black rounded bg-slate-100 my-10 mx-8 ">
+            <div class="my-10">
+                <input class="h-10 w-150 mx-10 border border-black rounded bg-white" type="text"
+                    placeholder="Rechercher par Titre ou Auteur" id="Rechercher">
+            </div>
+            <div class="my-10">
+                <label for="trier">Trier par </label>
+                <select class="h-10 w-70 border border-black rounded bg-white" name="trier" id="trier">
+                    <option value="titre">Titre</option>
+                    <option value="auteur">Auteur</option>
+                    <option value="annee">Année</option>
+                </select>
+            </div>
         </section>
     </main>
 
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <footer>
+        <p class="flex justify-center ">Ma bibliothèque * Une application simple pour les amoureux des livres</p>
+    </footer>
 </body>
 </html>
