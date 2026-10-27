@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>gestion de livres</title>
     <link rel="stylesheet" href="assets/style.css">
+    <script src="src/app.js" defer></script>
 </head>
 
 <body>
@@ -28,47 +29,52 @@
             <div>
                 <h2 class="text-4xl font-bold text-slate-700 py-10 px-20">Ajouter un livre</h2>
             </div>
-            <form class="grid grid-cols-1 md:grid-cols-3 px-20 gap-8">
-                <div class="flex flex-col font-bold text-xl text-slate-700">
+            <form class="grid grid-cols-1 md:grid-cols-3 px-20 gap-8" id="form">
+                <div class="flex flex-col font-semibold text-xl text-slate-700">
                     <label for="title">Titre</label>
                     <input class="border border-black rounded w-80 h-10 bg-white" type="text" id="title"
                         placeholder="Ex: Hamelet" required>
+                        <p id="titreerror" class="text-red-600"></p>
                 </div>
 
-                <div class="flex flex-col font-bold text-xl text-slate-700">
+                <div class="flex flex-col font-semibold text-xl text-slate-700">
                     <label for="date">Année de publication</label>
                     <input class="border border-black rounded w-80 h-10 bg-white" type="number" id="date"
                         placeholder="Ex: 1999">
+                        <p id="dateerror" class="text-red-600"></p>
                 </div>
 
-                <div class="flex flex-col font-bold text-xl text-slate-700">
+                <div class="flex flex-col font-semibold text-xl text-slate-700">
                     <label for="genre">Genre</label>
                     <input class="border border-black rounded w-80 h-10 bg-white" type="text" id="genre"
                         placeholder="Ex: Roman">
+                        <p id="genreerror" class="text-red-600"></p>
                 </div>
 
-                <div class="flex flex-col font-bold text-xl text-slate-700">
+                <div class="flex flex-col font-semibold text-xl text-slate-700">
                     <label for="author">Auteur</label>
                     <input class="border border-black rounded w-80 h-10 bg-white" type="text" id="author"
                         placeholder="Ex: Ahmed Alami" required>
+                        <p id="auteurerror" class="text-red-600"></p>
                 </div>
 
-                <div class="flex flex-col font-bold text-xl text-slate-700">
+                <div class="flex flex-col font-semibold text-xl text-slate-700">
                     <label for="statut">Statut-de-Lecture</label>
                     <select class="border border-black rounded w-80 h-10 bg-white" id="statut">
-                        <option value="to-read">To-Read</option>
-                        <option value="reading">Reading</option>
-                        <option value="read">Read</option>
+                        <option value="A-lire">A-lire</option>
+                        <option value="En-lisant">En-lisant</option>
+                        <option value="Lu">Lu</option>
                     </select>
+                    <p id="statuterror" class="text-red-600"></p>
                 </div>
 
-                <div class="flex flex-col font-bold text-xl text-slate-700">
+                <div class="flex flex-col font-semibold text-xl text-slate-700">
                     <label for="description">Description</label>
                     <textarea class="border border-black rounded w-80 h-10 bg-white" name="desciption" id="desciption"
                         placeholder="Une courte description du livre"></textarea>
                 </div>
                 <div>
-                    <button class="bg-slate-700 text-white text-2xl h-15 w-50 rounded-full my-2">Ajouter</button>
+                    <button class="bg-slate-700 text-white text-2xl h-15 w-50 rounded-full my-2" type="submit" id="Ajouter">Ajouter</button>
                 </div>
             </form>
         </section>
@@ -87,6 +93,79 @@
                 </select>
             </div>
         </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 mr-25 gap-20" id="listeslivres">
+              <section class="border bg-slate-50 h-100 w-100 rounded mx-8">
+            <div class="flex flex-col gap-5 justify-start my-8 mx-8">
+                <div>
+                    <h2 id="titrelivre" class="text-3xl font-semibold"> Le petit prince</h2>
+                </div>
+                <div>
+                    <p id="auteurlivre">Auteur: Antoine de Saint</p>
+                    <p id="anneelivre">Année: 1993</p>
+                    <p id="genrelivre">Genre: Conte</p>
+                </div>
+                <div>
+                    <p id="etat" class="border rounded-full w-40 px-3 bg-slate-500 text-white">Lu</p>
+                </div>
+                <div>
+                    <p id="descriptionlivre">Un conte philisophique sur l'amitié, l'amour, et la vie.</p>
+                </div>
+                <div>
+                    <button id="modifier" class="border bg-blue-200 rounded w-25 h-10 text-blue-800 font-bold">Modifier</button>
+                    <button id="Supprimer" class="border bg-red-200 rounded w-25 h-10 text-red-800 font-bold">Supprimer</button>
+                </div>
+            </div>
+            </section>
+        
+               
+
+            <section class="flex flex-row border bg-slate-50 h-100 w-100 rounded mx-8">
+            <div class="flex flex-col gap-5 justify-start my-8 mx-8">
+                <div>
+                    <h2 id="titrelivre" class="text-3xl font-semibold"> Le petit prince</h2>
+                </div>
+                <div>
+                    <p id="auteurlivre">Auteur: Antoine de Saint</p>
+                    <p id="anneelivre">Année: 1993</p>
+                    <p id="genrelivre">Genre: Conte</p>
+                </div>
+                <div>
+                    <p id="etat" class="border rounded-full w-40 px-3 bg-slate-500 text-white">Lu</p>
+                </div>
+                <div>
+                    <p id="descriptionlivre">Un conte philisophique sur l'amitié, l'amour, et la vie.</p>
+                </div>
+                <div>
+                    <button id="modifier" class="border bg-blue-200 rounded w-25 h-10 text-blue-800 font-bold">Modifier</button>
+                    <button id="Supprimer" class="border bg-red-200 rounded w-25 h-10 text-red-800 font-bold">Supprimer</button>
+                </div>
+            </div>
+            </section>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </main>
 
     <footer>

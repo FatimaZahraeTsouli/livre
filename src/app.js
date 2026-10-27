@@ -1,0 +1,146 @@
+const titre = document.getElementById("title");
+const date = document.getElementById("date");
+const genre = document.getElementById("genre");
+const auteur = document.getElementById("author");
+const description = document.getElementById("desciption");
+const ajouter = document.getElementById("Ajouter");
+const statut = document.getElementById("statut");
+const statuterror = document.getElementById("statuterror");
+const rechercher = document.getElementById("Rechercher");
+const trier = document.getElementById("trier");
+const triervaleur = trier.value;
+const titreerror = document.getElementById("titreerror");
+const dateerror = document.getElementById("dateerror");
+const genreerror = document.getElementById("genreerror");
+const auteurerror = document.getElementById("auteurerror");
+const form = document.getElementById("form");
+const listeslivres = document.getElementById("listeslivres");
+
+
+
+function validertitre(){
+    const valeur = titre.value.trim();
+
+    if (valeur.length <2 ){
+        titreerror.textContent = "le titre est très court!";
+        return false;
+} else if (valeur.length > 40){
+    titreerror.textContent = "le titre est très long!";
+    return false;
+}
+    titreerror.textContent ="";
+    return true;
+
+}
+titre.addEventListener("input", function(){
+    validertitre()
+})
+
+function validerdate(){
+    const date1 = date.value;
+    if (date1.length != 4){
+        dateerror.textContent = "veuillez entrée une date valable!";
+        return false
+    }
+    dateerror.textContent = "";
+    return true;
+}
+date.addEventListener("input", function(){
+    validerdate()
+})
+  
+function validerstatut(){
+    const statutvaleur = statut.value;
+    if(statutvaleur !== "A-lire" && statutvaleur !== "En-lisant" && statutvaleur !== "Lu"){
+        statuterror.textContent = "Veuillez entrée un choix valable!";
+        return false;
+    }
+    statuterror.textContent = "";
+    return true;
+}
+statut.addEventListener("input", function(){
+    validerstatut();
+})
+
+function validerauteur(){
+    const auteurvaleur = auteur.value.trim()
+    if (auteurvaleur.length < 2){
+        auteurerror.textContent = "le nom est très court!";
+        return false;
+    }
+    else if (auteurvaleur.length > 20){
+        auteurerror.textContent = "le nom est très long!";
+        return false; 
+    }
+    auteurerror.textContent = "";
+    return true;
+}
+auteur.addEventListener("input", function(){
+    validerauteur();
+})
+
+form.addEventListener("submit", function(event){
+    event.preventDefault();
+
+    if(!validertitre()){
+        titre.focus();
+        return; 
+    }
+    if (!validerdate()){
+        date.focus();
+        return;
+    }
+    if (!validerstatut()){
+        statut.focus();
+        return;
+    }
+    if (!validerauteur()){
+        auteur.focus();
+        return;
+    }
+
+    ajouterlivre()
+    form.reset();
+})
+
+function ajouterlivre(){
+    const section = document.createElement("section");
+    section.className = "border bg-slate-50 h-100 w-100 rounded mx-8 flex flex-col gap-5 justify-start py-8 px-8";
+    const titrelivre = document.createElement("h2");
+    titrelivre.className = "text-3xl font-semibold"
+    titrelivre.textContent = titre.value;
+    const infoslivre = document.createElement("div");
+    infoslivre.className = "flex flex-col gap-0";
+    const auteurlivre = document.createElement("p");
+    auteurlivre.textContent = "Auteur: " + auteur.value;
+    const datelivre = document.createElement("p");
+    datelivre.textContent = " Année : " + date.value;
+    const genrelivre = document.createElement("p");
+    genrelivre.textContent = "Genre : " + genre.value;
+    const statutlivre = document.createElement("p");
+    statutlivre.className = "border rounded-full w-40 px-3 bg-slate-500 text-white"
+    statutlivre.textContent = statut.value;
+    const descriptionlivre = document.createElement("p");
+    descriptionlivre.textContent = description.value;
+    const boutons = document.createElement("div");
+    boutons.className = "flex gap-3";
+    const modifierlivre = document.createElement("button");
+    modifierlivre.className = "border bg-blue-200 rounded w-25 h-10 text-blue-800 font-bold"
+    modifierlivre.textContent = "Modifier";
+    const supprimerlivre = document.createElement("button");
+    supprimerlivre.className = "border bg-red-200 rounded w-25 h-10 text-red-800 font-bold"
+    supprimerlivre.textContent = "Supprimer";
+
+    section.appendChild(titrelivre);
+    infoslivre.appendChild(auteurlivre);
+    infoslivre.appendChild(datelivre);
+    infoslivre.appendChild(genrelivre);
+    section.appendChild(infoslivre);
+    section.appendChild(statutlivre);
+    section.appendChild(descriptionlivre);
+    boutons.appendChild(modifierlivre);
+    boutons.appendChild(supprimerlivre);
+    section.appendChild(boutons);
+
+    listeslivres.appendChild(section);
+}
