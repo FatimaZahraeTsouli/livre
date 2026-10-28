@@ -18,110 +18,122 @@ const listeslivres = document.getElementById("listeslivres");
 
 
 
-function validertitre(){
+function validertitre() {
     const valeur = titre.value.trim();
 
-    if (valeur.length <2 ){
+    if (valeur.length < 2) {
         titreerror.textContent = "le titre est très court!";
         return false;
-} else if (valeur.length > 40){
-    titreerror.textContent = "le titre est très long!";
-    return false;
-}
-    titreerror.textContent ="";
+    } else if (valeur.length > 40) {
+        titreerror.textContent = "le titre est très long!";
+        return false;
+    }
+    titreerror.textContent = "";
     return true;
 
 }
-titre.addEventListener("input", function(){
+titre.addEventListener("input", function () {
     validertitre()
 })
 
-function validerdate(){
+function validerdate() {
     const date1 = date.value;
-    if (date1.length != 4){
+    if (date1.length != 4 && date1.length != 0) {
         dateerror.textContent = "veuillez entrée une date valable!";
         return false
     }
     dateerror.textContent = "";
     return true;
 }
-date.addEventListener("input", function(){
+date.addEventListener("input", function () {
     validerdate()
 })
-  
-function validerstatut(){
+
+function validerstatut() {
     const statutvaleur = statut.value;
-    if(statutvaleur !== "A-lire" && statutvaleur !== "En-lisant" && statutvaleur !== "Lu"){
+    if (statutvaleur !== "A-lire" && statutvaleur !== "En-lisant" && statutvaleur !== "Lu") {
         statuterror.textContent = "Veuillez entrée un choix valable!";
         return false;
     }
     statuterror.textContent = "";
     return true;
 }
-statut.addEventListener("input", function(){
+statut.addEventListener("input", function () {
     validerstatut();
 })
 
-function validerauteur(){
+function validerauteur() {
     const auteurvaleur = auteur.value.trim()
-    if (auteurvaleur.length < 2){
+    if (auteurvaleur.length < 2) {
         auteurerror.textContent = "le nom est très court!";
         return false;
     }
-    else if (auteurvaleur.length > 20){
+    else if (auteurvaleur.length > 20) {
         auteurerror.textContent = "le nom est très long!";
-        return false; 
+        return false;
     }
     auteurerror.textContent = "";
     return true;
 }
-auteur.addEventListener("input", function(){
+auteur.addEventListener("input", function () {
     validerauteur();
 })
 
-form.addEventListener("submit", function(event){
+form.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    if(!validertitre()){
+    if (!validertitre()) {
         titre.focus();
-        return; 
+        return;
     }
-    if (!validerdate()){
+    if (!validerdate()) {
         date.focus();
         return;
     }
-    if (!validerstatut()){
+    if (!validerstatut()) {
         statut.focus();
         return;
     }
-    if (!validerauteur()){
+    if (!validerauteur()) {
         auteur.focus();
         return;
     }
 
-    ajouterlivre()
+    const livre = {
+        titre: titre.value,
+        auteur: auteur.value,
+        date: date.value,
+        genre: genre.value,
+        statut: statut.value,
+        description: description.value
+    };
+    livres.push(livre);
+    localStorage.setItem("livres", JSON.stringify(livres));
+
+    ajouterlivre(livre);
     form.reset();
 })
 
-function ajouterlivre(){
+let livres = JSON.parse(localStorage.getItem("livres")) || [];
+function ajouterlivre(livre) {
     const section = document.createElement("section");
     section.className = "border bg-slate-50 h-100 w-100 rounded mx-8 flex flex-col gap-5 justify-start py-8 px-8";
     const titrelivre = document.createElement("h2");
     titrelivre.className = "text-3xl font-semibold"
-    titrelivre.textContent = titre.value;
+    titrelivre.textContent = livre.titre;
     const infoslivre = document.createElement("div");
     infoslivre.className = "flex flex-col gap-0";
     const auteurlivre = document.createElement("p");
-    auteurlivre.textContent = "Auteur: " + auteur.value;
+    auteurlivre.textContent = "Auteur: " + livre.auteur;
     const datelivre = document.createElement("p");
-    datelivre.textContent = " Année : " + date.value;
+    datelivre.textContent = " Année : " + livre.date;
     const genrelivre = document.createElement("p");
-    genrelivre.textContent = "Genre : " + genre.value;
+    genrelivre.textContent = "Genre : " + livre.genre;
     const statutlivre = document.createElement("p");
     statutlivre.className = "border rounded-full w-40 px-3 bg-slate-500 text-white"
-    statutlivre.textContent = statut.value;
+    statutlivre.textContent = livre.statut;
     const descriptionlivre = document.createElement("p");
-    descriptionlivre.textContent = description.value;
+    descriptionlivre.textContent = livre.description;
     const boutons = document.createElement("div");
     boutons.className = "flex gap-3";
     const modifierlivre = document.createElement("button");
@@ -141,6 +153,11 @@ function ajouterlivre(){
     boutons.appendChild(modifierlivre);
     boutons.appendChild(supprimerlivre);
     section.appendChild(boutons);
-
     listeslivres.appendChild(section);
+
+
 }
+
+livres.forEach(function(livre) {
+    ajouterlivre(livre);
+});
