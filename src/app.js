@@ -15,11 +15,12 @@ const genreerror = document.getElementById("genreerror");
 const auteurerror = document.getElementById("auteurerror");
 const form = document.getElementById("form");
 const listeslivres = document.getElementById("listeslivres");
+const buttonrechercher = document.getElementById("buttonrechercher");
 
 
 
 function validertitre() {
-    const valeur = titre.value.trim();
+    const valeur = titre.value.trim().toLowerCase();
 
     if (valeur.length < 2) {
         titreerror.textContent = "le titre est très court!";
@@ -63,7 +64,7 @@ statut.addEventListener("input", function () {
 })
 
 function validerauteur() {
-    const auteurvaleur = auteur.value.trim()
+    const auteurvaleur = auteur.value.trim().toLowerCase();
     if (auteurvaleur.length < 2) {
         auteurerror.textContent = "le nom est très court!";
         return false;
@@ -100,10 +101,10 @@ form.addEventListener("submit", function (event) {
     }
 
     const livre = {
-        titre: titre.value,
-        auteur: auteur.value,
+        titre: titre.value.trim().toLowerCase(),
+        auteur: auteur.value.trim().toLowerCase(),
         date: date.value,
-        genre: genre.value,
+        genre: genre.value.trim().toLowerCase(),
         statut: statut.value,
         description: description.value
     };
@@ -161,3 +162,17 @@ function ajouterlivre(livre) {
 livres.forEach(function(livre) {
     ajouterlivre(livre);
 });
+
+
+// function rechercher livre 
+
+buttonrechercher.addEventListener("click", function(){
+    rechercherlivre()
+})
+
+function rechercherlivre(livre){
+    for (livre of livres){
+    if (rechercher.value.trim().toLowerCase() == livre.auteur){
+        console.log(livre);
+    }}
+}
