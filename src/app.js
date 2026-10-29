@@ -8,7 +8,6 @@ const statut = document.getElementById("statut");
 const statuterror = document.getElementById("statuterror");
 const rechercher = document.getElementById("Rechercher");
 const trier = document.getElementById("trier");
-const triervaleur = trier.value;
 const titreerror = document.getElementById("titreerror");
 const dateerror = document.getElementById("dateerror");
 const genreerror = document.getElementById("genreerror");
@@ -183,4 +182,40 @@ function rechercherlivre(){
     livresfiltre.forEach(function(livre){
         ajouterlivre(livre)
     })
+}
+
+
+// function trier livre 
+
+trier.addEventListener("input", function(){
+    trierlivre()
+})
+
+function trierlivre(livre){
+    
+    const triervaleur = trier.value.trim().toLowerCase();
+    const livrestries = [...livres];
+
+    if (triervaleur === "titre"){
+        livrestries.sort((a,b) => 
+        a.titre.localeCompare(b.titre)
+    );
+    }
+
+    if (triervaleur == "auteur"){
+        livrestries.sort((a,b) => 
+            a.auteur.localeCompare(b.auteur)
+    );
+    }
+
+    if (triervaleur == "annee"){
+        livrestries.sort((a, b) =>
+        Number(a.date || 0) - Number(b.date || 0)
+        );
+    }
+    listeslivres.replaceChildren();
+    livrestries.forEach(function(livre){
+    ajouterlivre(livre)  
+    })
+
 }
