@@ -34,28 +34,28 @@
                     <label for="title">Titre</label>
                     <input class="border border-black rounded w-80 h-10 bg-white" type="text" id="title"
                         placeholder="Ex: Hamelet" required>
-                        <p id="titreerror" class="text-red-600"></p>
+                    <p id="titreerror" class="text-red-600"></p>
                 </div>
 
                 <div class="flex flex-col font-semibold text-xl text-slate-700">
                     <label for="date">Année de publication</label>
                     <input class="border border-black rounded w-80 h-10 bg-white" type="number" id="date"
                         placeholder="Ex: 1999">
-                        <p id="dateerror" class="text-red-600"></p>
+                    <p id="dateerror" class="text-red-600"></p>
                 </div>
 
                 <div class="flex flex-col font-semibold text-xl text-slate-700">
                     <label for="genre">Genre</label>
                     <input class="border border-black rounded w-80 h-10 bg-white" type="text" id="genre"
                         placeholder="Ex: Roman">
-                        <p id="genreerror" class="text-red-600"></p>
+                    <p id="genreerror" class="text-red-600"></p>
                 </div>
 
                 <div class="flex flex-col font-semibold text-xl text-slate-700">
                     <label for="author">Auteur</label>
                     <input class="border border-black rounded w-80 h-10 bg-white" type="text" id="author"
                         placeholder="Ex: Ahmed Alami" required>
-                        <p id="auteurerror" class="text-red-600"></p>
+                    <p id="auteurerror" class="text-red-600"></p>
                 </div>
 
                 <div class="flex flex-col font-semibold text-xl text-slate-700">
@@ -74,7 +74,8 @@
                         placeholder="Une courte description du livre"></textarea>
                 </div>
                 <div>
-                    <button class="bg-slate-700 text-white text-2xl h-15 w-50 rounded-full my-2" type="submit" id="Ajouter">Ajouter</button>
+                    <button class="bg-slate-700 text-white text-2xl h-15 w-50 rounded-full my-2" type="submit"
+                        id="Ajouter">Ajouter</button>
                 </div>
             </form>
         </section>
@@ -96,12 +97,66 @@
         </section>
 
         <section class="grid grid-cols-1 md:grid-cols-3 mr-25 gap-20" id="listeslivres">
-           
+
         </section>
     </main>
 
     <footer>
         <p class="flex justify-center ">Ma bibliothèque * Une application simple pour les amoureux des livres</p>
     </footer>
+
+    <section id="modalmodification" class="flex justify-center fixed inset-0 z-50 hidden items-center bg-slate-200 w-100 p-4 mx-100">
+        <form id="formmodification">
+            <h2 class="text-2xl font-bold text-center">Modifier ce livre</h2>
+        <div class="flex flex-col font-semibold text-xl text-slate-700">
+            <label for="title-edit">Titre</label>
+            <input class="border border-black rounded w-80 h-10 bg-white" type="text" id="title-edit"
+                placeholder="Ex: Hamelet">
+            <p id="titreerror" class="text-red-600"></p>
+        </div>
+
+        <div class="flex flex-col font-semibold text-xl text-slate-700">
+            <label for="date-edit">Année de publication</label>
+            <input class="border border-black rounded w-80 h-10 bg-white" type="number" id="date-edit"
+                placeholder="Ex: 1999">
+            <p id="dateerror" class="text-red-600"></p>
+        </div>
+
+        <div class="flex flex-col font-semibold text-xl text-slate-700">
+            <label for="genre-edit">Genre</label>
+            <input class="border border-black rounded w-80 h-10 bg-white" type="text" id="genre-edit"
+                placeholder="Ex: Roman">
+            <p id="genreerror" class="text-red-600"></p>
+        </div>
+
+        <div class="flex flex-col font-semibold text-xl text-slate-700">
+            <label for="author-edit">Auteur</label>
+            <input class="border border-black rounded w-80 h-10 bg-white" type="text" id="author-edit"
+                placeholder="Ex: Ahmed Alami">
+            <p id="auteurerror" class="text-red-600"></p>
+        </div>
+
+        <div class="flex flex-col font-semibold text-xl text-slate-700">
+            <label for="statut-edit">Statut-de-Lecture</label>
+            <select class="border border-black rounded w-80 h-10 bg-white" id="statut-edit">
+                <option value="A-lire">A-lire</option>
+                <option value="En-lisant">En-lisant</option>
+                <option value="Lu">Lu</option>
+            </select>
+            <p id="statuterror" class="text-red-600"></p>
+        </div>
+
+        <div class="flex flex-col font-semibold text-xl text-slate-700">
+            <label for="description-edit">Description</label>
+            <textarea class="border border-black rounded w-80 h-10 bg-white" name="desciption" id="description-edit"
+                placeholder="Une courte description du livre"></textarea>
+        </div>
+        <div>
+            <button class="bg-slate-700 text-white text-2xl h-15 w-50 rounded-full my-2 mx-14" type="submit"
+                id="modifier-edit">Modifier</button>
+        </div>
+        </form>
+    </section>
 </body>
+
 </html>

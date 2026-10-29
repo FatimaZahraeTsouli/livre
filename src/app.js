@@ -15,7 +15,15 @@ const auteurerror = document.getElementById("auteurerror");
 const form = document.getElementById("form");
 const listeslivres = document.getElementById("listeslivres");
 const buttonrechercher = document.getElementById("buttonrechercher");
-
+const formmodification = document.getElementById("formmodification");
+const modalmodification = document.getElementById("modalmodification");
+const newtitle = document.getElementById("title-edit");
+const newdate = document.getElementById("date-edit");
+const newgenre = document.getElementById("genre-edit");
+const newauteur = document.getElementById("author-edit");
+const newstatut = document.getElementById("statut-edit");
+const newdescription = document.getElementById("description-edit");
+const enregistrer = document.getElementById("modifier-edit");
 
 
 function validertitre() {
@@ -114,6 +122,7 @@ form.addEventListener("submit", function (event) {
     form.reset();
 })
 
+let indexlivremodifier = null;
 let livres = JSON.parse(localStorage.getItem("livres")) || [];
 function ajouterlivre(livre) {
     const section = document.createElement("section");
@@ -156,10 +165,20 @@ function ajouterlivre(livre) {
     listeslivres.appendChild(section);
 
 
+    modifierlivre.addEventListener("click", function(){
+        indexlivremodifier = livres.indexOf(livre);
+
+        formmodification.reset();
+        modalmodification.classList.remove("hidden");
+        modalmodification.classList.add("flex");
+
+})
+    
 }
 
 livres.forEach(function(livre) {
     ajouterlivre(livre);
+
 });
 
 
@@ -219,3 +238,36 @@ function trierlivre(){
     })
 
 }
+
+formmodification.addEventListener("submit", function(event){
+    event.preventDefault();
+
+    const titremodifier = newtitle.value;
+    const datemodifier = newdate.value;
+    const auteurmodifier = newauteur.value;
+    const genremodifier = newgenre.value;
+    const statutmodifier = newstatut.value;
+    const descriptionmodifier = newdescription.value;
+
+    livres[indexlivremodifier].titre = titremodifier;
+    livres[indexlivremodifier].date = datemodifier;
+    livres[indexlivremodifier].auteur = auteurmodifier;
+    livres[indexlivremodifier].genre = genremodifier;
+    livres[indexlivremodifier].statut = statutmodifier;
+    livres[indexlivremodifier].description = descriptionmodifier;
+
+localStorage.setItem("livres", JSON.stringify(livres));
+
+listeslivres.replaceChildren();
+livres.forEach(function(livre) {
+    ajouterlivre(livre);
+});
+
+modalmodification.classList.add("hidden");
+modalmodification.classList.remove("flex");
+formmodification.reset();
+  
+
+
+})
+
