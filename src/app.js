@@ -170,9 +170,17 @@ buttonrechercher.addEventListener("click", function(){
     rechercherlivre()
 })
 
-function rechercherlivre(livre){
-    for (livre of livres){
-    if (rechercher.value.trim().toLowerCase() == livre.auteur){
-        console.log(livre);
-    }}
+function rechercherlivre(){
+    const recherche = rechercher.value.trim().toLowerCase()
+
+    const livresfiltre = livres.filter(function(livre){
+    return livre.titre.toLowerCase().includes(recherche) || 
+        livre.auteur.toLowerCase().includes(recherche)
+    })
+
+    listeslivres.replaceChildren();
+
+    livresfiltre.forEach(function(livre){
+        ajouterlivre(livre)
+    })
 }
