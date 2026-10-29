@@ -191,7 +191,7 @@ trier.addEventListener("input", function(){
     trierlivre()
 })
 
-function trierlivre(livre){
+function trierlivre(){
     
     const triervaleur = trier.value.trim().toLowerCase();
     const livrestries = [...livres];
