@@ -24,6 +24,9 @@ const newauteur = document.getElementById("author-edit");
 const newstatut = document.getElementById("statut-edit");
 const newdescription = document.getElementById("description-edit");
 const enregistrer = document.getElementById("modifier-edit");
+const btnsupprimer = document.getElementById("btnsupprimer");
+const btnannuler = document.getElementById("btnannuler");
+const Supprimer = document.getElementById("supprimer");
 
 
 function validertitre() {
@@ -122,6 +125,7 @@ form.addEventListener("submit", function (event) {
     form.reset();
 })
 
+let indexlivresupprimer = null;
 let indexlivremodifier = null;
 let livres = JSON.parse(localStorage.getItem("livres")) || [];
 function ajouterlivre(livre) {
@@ -171,6 +175,14 @@ function ajouterlivre(livre) {
         formmodification.reset();
         modalmodification.classList.remove("hidden");
         modalmodification.classList.add("flex");
+
+})
+
+
+    supprimerlivre.addEventListener("click", function(){
+        indexlivresupprimer = livres.indexOf(livre);
+
+        Supprimer.classList.remove("hidden");       
 
 })
     
@@ -271,3 +283,6 @@ formmodification.reset();
 
 })
 
+indexlivresupprimer = livres.indexOf(livre);
+
+        localStorage.removeItem("livre", JSON.stringify(livres));
