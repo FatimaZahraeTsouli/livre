@@ -2,7 +2,7 @@ const titre = document.getElementById("title");
 const date = document.getElementById("date");
 const genre = document.getElementById("genre");
 const auteur = document.getElementById("author");
-const description = document.getElementById("desciption");
+const description = document.getElementById("description");
 const ajouter = document.getElementById("Ajouter");
 const statut = document.getElementById("statut");
 const statuterror = document.getElementById("statuterror");
@@ -110,11 +110,12 @@ form.addEventListener("submit", function (event) {
         return;
     }
 
+
     const livre = {
-        titre: titre.value.trim().toLowerCase(),
-        auteur: auteur.value.trim().toLowerCase(),
+        titre: titre.value.trim(),
+        auteur: auteur.value.trim(),
         date: date.value,
-        genre: genre.value.trim().toLowerCase(),
+        genre: genre.value.trim(),
         statut: statut.value,
         description: description.value
     };
@@ -125,7 +126,6 @@ form.addEventListener("submit", function (event) {
     form.reset();
 })
 
-let indexlivresupprimer = null;
 let indexlivremodifier = null;
 let livres = JSON.parse(localStorage.getItem("livres")) || [];
 function ajouterlivre(livre) {
@@ -283,6 +283,33 @@ formmodification.reset();
 
 })
 
-indexlivresupprimer = livres.indexOf(livre);
+let indexlivresupprimer = null;
+btnsupprimer.addEventListener("click", function(){
 
-        localStorage.removeItem("livre", JSON.stringify(livres));
+    if (indexlivresupprimer === null) return;
+
+    livres.splice(indexlivresupprimer, 1);
+
+    localStorage.setItem("livres", JSON.stringify(livres));
+
+    listeslivres.replaceChildren();
+
+    livres.forEach(function(livre) {
+        ajouterlivre(livre);
+
+    });
+
+    Supprimer.classList.add("hidden");
+    indexlivresupprimer = null;
+
+})
+
+btnannuler.addEventListener("click", function(){
+    Supprimer.classList.add("hidden");
+})
+
+
+
+
+
+        
