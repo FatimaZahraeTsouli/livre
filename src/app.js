@@ -1,3 +1,5 @@
+import { validertitre , validerdate , validerstatut, validerauteur, rechercherlivre, trierlivre} from "../functions.js"
+
 const titre = document.getElementById("title");
 const date = document.getElementById("date");
 const genre = document.getElementById("genre");
@@ -29,83 +31,42 @@ const btnannuler = document.getElementById("btnannuler");
 const Supprimer = document.getElementById("supprimer");
 
 
-function validertitre() {
-    const valeur = titre.value.trim().toLowerCase();
 
-    if (valeur.length < 2) {
-        titreerror.textContent = "le titre est très court!";
-        return false;
-    } else if (valeur.length > 40) {
-        titreerror.textContent = "le titre est très long!";
-        return false;
-    }
-    titreerror.textContent = "";
-    return true;
-
-}
 titre.addEventListener("input", function () {
-    validertitre()
+    validertitre(titre, titreerror)
 })
 
-function validerdate() {
-    const date1 = date.value;
-    if (date1.length != 4 && date1.length != 0) {
-        dateerror.textContent = "veuillez entrée une date valable!";
-        return false
-    }
-    dateerror.textContent = "";
-    return true;
-}
+
 date.addEventListener("input", function () {
-    validerdate()
+    validerdate(date, dateerror)
 })
 
-function validerstatut() {
-    const statutvaleur = statut.value;
-    if (statutvaleur !== "A-lire" && statutvaleur !== "En-lisant" && statutvaleur !== "Lu") {
-        statuterror.textContent = "Veuillez entrée un choix valable!";
-        return false;
-    }
-    statuterror.textContent = "";
-    return true;
-}
+
 statut.addEventListener("input", function () {
-    validerstatut();
+    validerstatut(statut, statuterror);
 })
 
-function validerauteur() {
-    const auteurvaleur = auteur.value.trim().toLowerCase();
-    if (auteurvaleur.length < 2) {
-        auteurerror.textContent = "le nom est très court!";
-        return false;
-    }
-    else if (auteurvaleur.length > 20) {
-        auteurerror.textContent = "le nom est très long!";
-        return false;
-    }
-    auteurerror.textContent = "";
-    return true;
-}
+
 auteur.addEventListener("input", function () {
-    validerauteur();
+    validerauteur(auteur, auteurerror);
 })
 
 form.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    if (!validertitre()) {
+    if (!validertitre(titre, titreerror)) {
         titre.focus();
         return;
     }
-    if (!validerdate()) {
+    if (!validerdate(date, dateerror)) {
         date.focus();
         return;
     }
-    if (!validerstatut()) {
+    if (!validerstatut(statut, statuterror)) {
         statut.focus();
         return;
     }
-    if (!validerauteur()) {
+    if (!validerauteur(auteur, auteurerror)) {
         auteur.focus();
         return;
     }
@@ -197,59 +158,18 @@ livres.forEach(function(livre) {
 // function rechercher livre 
 
 buttonrechercher.addEventListener("click", function(){
-    rechercherlivre()
+    rechercherlivre(rechercher, livres, ajouterlivre)
 })
 
-function rechercherlivre(){
-    const recherche = rechercher.value.trim().toLowerCase()
-
-    const livresfiltre = livres.filter(function(livre){
-    return livre.titre.toLowerCase().includes(recherche) || 
-        livre.auteur.toLowerCase().includes(recherche)
-    })
-
-    listeslivres.replaceChildren();
-
-    livresfiltre.forEach(function(livre){
-        ajouterlivre(livre)
-    })
-}
 
 
 // function trier livre 
 
 trier.addEventListener("input", function(){
-    trierlivre()
+    trierlivre(trier, titre, auteur, date, ajouterlivre, livres)
 })
 
-function trierlivre(){
-    
-    const triervaleur = trier.value.trim().toLowerCase();
-    const livrestries = [...livres];
 
-    if (triervaleur === "titre"){
-        livrestries.sort((a,b) => 
-        a.titre.localeCompare(b.titre)
-    );
-    }
-
-    if (triervaleur == "auteur"){
-        livrestries.sort((a,b) => 
-            a.auteur.localeCompare(b.auteur)
-    );
-    }
-
-    if (triervaleur == "annee"){
-        livrestries.sort((a, b) =>
-        Number(a.date || 0) - Number(b.date || 0)
-        );
-    }
-    listeslivres.replaceChildren();
-    livrestries.forEach(function(livre){
-    ajouterlivre(livre)  
-    })
-
-}
 
 formmodification.addEventListener("submit", function(event){
     event.preventDefault();
