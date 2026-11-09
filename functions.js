@@ -95,3 +95,8 @@ export function trierlivre(trier, titre, auteur, date, ajouterlivre, livres){
     })
 
 }
+
+
+export function afficherlivres() {
+    
+}
